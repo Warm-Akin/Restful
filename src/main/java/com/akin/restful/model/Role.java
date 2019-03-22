@@ -3,9 +3,7 @@ package com.akin.restful.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Role {
 
@@ -32,7 +30,7 @@ public class Role {
     private String parentOrgId;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
-    private Set<RoleAuthority> roleAuthorities = new HashSet<>(0);
+    private List<RoleAuthority> roleAuthorities = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")// mappedBy 与当前类关联的类(UserRole)定义此类(Role)的属性
     private Set<UserRole> userRoles = new HashSet<>(0);
@@ -85,11 +83,11 @@ public class Role {
         this.parentOrgId=parentOrgId;
     }
 
-    public Set<RoleAuthority> getRoleAuthorities() {
+    public List<RoleAuthority> getRoleAuthorities() {
         return roleAuthorities;
     }
 
-    public void setRoleAuthorities(Set<RoleAuthority> roleAuthorities) {
+    public void setRoleAuthorities(List<RoleAuthority> roleAuthorities) {
         this.roleAuthorities=roleAuthorities;
     }
 

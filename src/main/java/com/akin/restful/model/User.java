@@ -4,9 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class User implements Serializable {
 
@@ -55,7 +53,7 @@ public class User implements Serializable {
     private String parentOrgId;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<UserRole> userRoles = new HashSet<>(0);
+    private List<UserRole> userRoles = new ArrayList<>();
 
     public String getUserId() {
         return userId;
@@ -161,11 +159,11 @@ public class User implements Serializable {
         this.parentOrgId=parentOrgId;
     }
 
-    public Set<UserRole> getUserRoles() {
+    public List<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
+    public void setUserRoles(List<UserRole> userRoles) {
         this.userRoles=userRoles;
     }
 }
